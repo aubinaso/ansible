@@ -1,2 +1,0 @@
-ansible_host: 192.168.2.3
-wordpress_url: "http://{ ansible_host }"
