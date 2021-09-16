@@ -1,0 +1,18 @@
+ansible_python_interpreter: /usr/bin/python3
+
+ansible_user: root
+# ansible_port: 80
+ansible_port_http: 80
+
+base_packages:
+#  - nano
+#  - netcat
+#  - zip
+#  - unzip
+#  - python3
+#  - python3-pip
+#  - git
+#  - vim
+#  - rsync
+#  - curl
+  - wget 
