@@ -1,0 +1,13 @@
+- name: update des packages et installation des paquets de base
+  hosts: all
+  become: true
+  gather_facts: true
+  tasks:
+  - name: mise a jour des serveurs et installation des paquets de base
+    apt:
+      name: "{{ base_packages }}"
+      install_recommends: true
+      force: true
+      update_cache: true
+      state: latest
+ 

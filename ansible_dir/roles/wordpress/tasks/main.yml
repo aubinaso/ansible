@@ -1,0 +1,40 @@
+---
+# tasks file for wordpress
+
+- name: Check if exists
+  stat:
+    path: "{{ wordpress_path }}"
+  register: check_wordpress
+
+- name: Download and Extract WordPress
+  unarchive:
+    src: "{{ wordpress_source }}"
+    dest: /var/www/html
+    remote_src: yes
+  when: check_wordpress.stat.exists == False
+
+- name: remove index
+  file:
+    path: "{{ html_root }}index.html" 
+    state: absent
+
+- name: Check if file exists
+  stat:
+    path: "{{ wordpress_path }}wp-config-sample.php"
+  register: check_sample
+
+- name: Copy sample config file
+  command: mv /var/www/html/wordpress/wp-config-sample.php /var/www/html/wordpress/wp-config.php
+  when: check_sample.stat.exists == True
+
+- name: Update Wordpress config file
+  lineinfile:
+    path: "{{ wordpress_path }}wp-config.php"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items: "{{ regexp_wordpress }}"
+  
+- name: test
+  fetch:
+    src: "{{ wordpress_path }}wp-config.php"
+    dest: ./roles/toto.php
