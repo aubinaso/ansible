@@ -1,0 +1,15 @@
+---
+# tasks file for apache
+
+- name: Installation de Apache
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ apache_modules }}"
+ 
+- name: Installation de PHP
+  apt:
+    name: "php-{{ item }}"
+    state: latest
+  with_items: "{{ php_modules }}" 
+  notify: Restart Apache

@@ -1,0 +1,19 @@
+---
+# defaults file for apache
+apache_modules:
+  - apache2
+  - libapache2-mod-php
+  - mariadb-server
+  - python3-mysqldb
+
+php_modules:
+#  - cli
+#  - gd
+#  - fpm
+  - common
+#  - mbstring
+#  - xmlrpc
+#  - xml
+  - mysql
+#  - zip
+#  - curl
